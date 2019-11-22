@@ -1,0 +1,17 @@
+.spartBox {
+  border: black;
+  border-width: 1px;
+  border-style:  solid;
+  width: 200px;
+}
+.spartRow {
+  display: flex;
+  border: black;
+  border-width: 1px;
+  border-style:  solid;
+  margin: 2px;
+  justify-content: space-between;
+}
+.spartCell {
+  margin: 2px;
+}

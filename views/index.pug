@@ -1,0 +1,15 @@
+html
+  head
+    title Fighter Stats
+    link(rel='stylesheet', href='/stylesheets/layout.css')
+  body
+    form(action="/search/", method="post")
+      | Search:
+      input(type="text", name="search")
+      br
+      input(type="submit", value="Search")
+    a(href='/list/players/') List All Players
+    br
+    a(href='/list/all/') List All Fighters
+    br
+    a(href='/add') New Fighter
