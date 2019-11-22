@@ -17,85 +17,98 @@ app.use(express.static("public"));
 
 
 app.listen(3000, function() {
-  console.log('Listening on port ' + 3000 + '.');
+    console.log('Listening on port ' + 3000 + '.');
 });
 
 app.get('/', function(req, res, err) {
-  res.status(200).render('index');
+    res.status(200).render('index');
 });
 
 app.post('/search', function(req, res, err) {
-  request('http://localhost:3001/api/v0/search/' + req.body.search, function(request_err, request_res, request_body) {
-    if (request_err || request_res.statusCode != 200) {
-      res.send("Oops! There was a problem with the request module: <br>" + request_err);
-    } else if (request_body == "undefined") {
-      res.send("Oops! Server had no fighters!");
-    } else {
-      res.status(200).render('listfighters', {list: JSON.parse(request_body)});
-    }
-  })
+    request('http://jsfdb.supermechacow.com/api/v0/fighter/search/' + req.body.search, function(request_err, request_res, request_body) {
+        if (request_err || request_res.statusCode != 200) {
+            res.send("Oops! There was a problem with the request module: <br>" + request_err);
+        } else if (request_body == "undefined") {
+            res.send("Oops! Server had no fighters!");
+        } else {
+            res.status(200).render('listfighters', {
+                list: JSON.parse(request_body)
+            });
+        }
+    })
 });
 
 app.get('/list/fighters', function(req, res, err) {
-  request('http://localhost:3001/api/v0/list/all', function(request_err, request_res, request_body) {
-    if (request_err || request_res.statusCode != 200) {
-      res.send("Oops! There was a problem with the request module: <br>" + request_err);
-    } else if (request_body == "undefined") {
-      res.send("Oops! Server had no fighters!");
-    } else {
-      res.status(200).render('listfighters', {list: JSON.parse(request_body)});
-    }
-  })
+    request('http://jsfdb.supermechacow.com/api/v0/fighter/list/', function(request_err, request_res, request_body) {
+        if (request_err || request_res.statusCode != 200) {
+            res.send("Oops! There was a problem with the request module: <br>" + request_err);
+        } else if (request_body == "undefined") {
+            res.send("Oops! Server had no fighters!");
+        } else {
+            res.status(200).render('listfighters', {
+                list: JSON.parse(request_body)
+            });
+        }
+    })
 });
 
 app.get('/list/players', function(req, res, err) {
-  request('http://localhost:3001/api/v0/list/players', function(request_err, request_res, request_body) {
-    if (request_err || request_res.statusCode != 200) {
-      res.send("Oops! There was a problem with the request module: <br>" + request_err);
-    } else if (request_body == "undefined") {
-      res.send("Oops! Server had no players!");
-    } else {
-      res.status(200).render('listplayers', {list: JSON.parse(request_body)});
-    }
-  })
+    request('http://jsfdb.supermechacow.com/api/v0/player/list', function(request_err, request_res, request_body) {
+        if (request_err || request_res.statusCode != 200) {
+            res.send("Oops! There was a problem with the request module: <br>" + request_err);
+        } else if (request_body == "undefined") {
+            res.send("Oops! Server had no players!");
+        } else {
+            res.status(200).render('listplayers', {
+                list: JSON.parse(request_body)
+            });
+        }
+    })
 });
 
 app.get('/player/:player', function(req, res, err) {
-  request('http://localhost:3001/api/v0/player/' + req.params.player, function(request_err, request_res, request_body) {
-    if (request_err || request_res.statusCode != 200) {
-      res.send("Oops! There was a problem with the request module: <br>" + request_err);
-    } else if (request_body == "undefined") {
-      res.send("Oops! Server didn't find that player in the database: <br>" + req.params.player);
-    } else {
-      res.status(200).render('listfighters', {list: JSON.parse(request_body)});
-    }
-  })
+    request('http://jsfdb.supermechacow.com/api/v0/player/show/' + req.params.player, function(request_err, request_res, request_body) {
+        if (request_err || request_res.statusCode != 200) {
+            res.send("Oops! There was a problem with the request module: <br>" + request_err);
+        } else if (request_body == "undefined") {
+            res.send("Oops! Server didn't find that player in the database: <br>" + req.params.player);
+        } else {
+            res.status(200).render('listfighters', {
+                list: JSON.parse(request_body)
+            });
+        }
+    })
 });
 
-app.get('/fighter/:fighter', function(req, res, err) {
-  request('http://localhost:3001/api/v0/fighter/' + req.params.fighter, function(request_err, request_res, request_body) {
-    if (request_err || request_res.statusCode != 200) {
-      res.send("Oops! There was a problem with the request module: <br>" + request_err);
-    } else if (request_body == "undefined") {
-      res.send("Oops! Server didn't find that fighter in the database: <br>" + req.params.fighter);
-    } else {
-      res.status(200).render('fighter', JSON.parse(request_body));
-    }
-  })
+app.get('/fighter/:fighterUID', function(req, res, err) {
+    request('http://jsfdb.supermechacow.com/api/v0/fighter/show/' + req.params.fighterUID, function(request_err, request_res, request_body) {
+        if (request_err || request_res.statusCode != 200) {
+            res.send("Oops! There was a problem with the request module: <br>" + request_err);
+        } else if (request_body == "undefined") {
+            res.send("Oops! Server didn't find that fighter in the database: <br>" + req.params.fighterUID);
+        } else {
+            res.status(200).render('fighter', JSON.parse(request_body));
+        }
+    })
 });
 
 app.get('/add/', function(req, res, err) {
-  res.status(200).render('add');
+    res.status(200).render('add');
 });
 
 app.post('/add/', function(req, res, err) {
-  request.post("http://localhost:3001/api/v0/fighter/", {form: {fightername: req.body.fightername, fighterID: req.body.fighterID}}, function(request_err, request_res, request_body) {
-    if (request_res.statusCode == 201) {
-      res.status(200).redirect("/fighter/" + req.body.fighterID);
-    } else if (request_res.statusCode == 403) {
-      res.status(200).redirect("/fighter/" + req.body.fighterID);
-    } else {
-      res.send("Error!")
-    }
-  })
+    request.post("http://jsfdb.supermechacow.com/api/v0/fighter/", {
+        form: {
+            fightername: req.body.fightername,
+            fighterID: req.body.fighterID
+        }
+    }, function(request_err, request_res, request_body) {
+        if (request_res.statusCode == 201) {
+            res.status(200).redirect("/fighter/" + req.body.fighterID);
+        } else if (request_res.statusCode == 403) {
+            res.status(200).redirect("/fighter/" + req.body.fighterID);
+        } else {
+            res.send("Error!")
+        }
+    })
 });

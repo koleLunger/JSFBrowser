@@ -1,11 +1,11 @@
 html
   head
-    title Student Stats
+    title Player Stats
     link(rel='stylesheet', href='/stylesheets/layout.css')
   body
     .spartBox
-      each classitem in list
+      each playeritem in list
         .spartRow
           .spartCell
-            a(href='../../class/' + classitem.class_code)= classitem.class_name
+            a(href='../../player/' + playeritem.player_UID)= playeritem.player_name
     a(href='../') Home
