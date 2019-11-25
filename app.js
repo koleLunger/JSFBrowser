@@ -1,4 +1,4 @@
-const express = require('express'); //Load express framework module
+ const express = require('express'); //Load express framework module
 const app = express(); //create an instance of express named "app"
 const path = require('path'); //create an instance of the express direcrory handler
 const request = require('request'); // For making API requests
@@ -39,7 +39,7 @@ app.post('/search', function(req, res, err) {
 });
 
 app.get('/list/fighters', function(req, res, err) {
-    request('http://jsfdb.supermechacow.com/api/v0/fighter/list/', function(request_err, request_res, request_body) {
+    request('http://jsfdb.supermechacow.com/api/v0/fighter/list/views/listfighters.pug', function(request_err, request_res, request_body) {
         if (request_err || request_res.statusCode != 200) {
             res.send("Oops! There was a problem with the request module: <br>" + request_err);
         } else if (request_body == "undefined") {
