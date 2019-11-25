@@ -1,0 +1,11 @@
+html
+  head
+    title Student Stats
+    link(rel='stylesheet', href='/stylesheets/layout.css')
+  body
+    .spartBox
+      each student in list
+        .spartRow
+          .spartCell
+            a(href='../../student/' + student.student_ID)= student.student_name
+    a(href='../') Home

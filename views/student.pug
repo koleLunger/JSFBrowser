@@ -1,0 +1,20 @@
+html
+  head
+    title Student Stats
+    link(rel='stylesheet', href='/stylesheets/layout.css')
+  body
+    h1= student_name
+    a(href='../class/' + class_code)= class_code
+    br
+    br
+    .spartBox
+      .spartRow
+        .spartCell ATK:
+        .spartCell= stat_atk
+      .spartRow
+        .spartCell DEF:
+        .spartCell= stat_def
+      .spartRow
+        .spartCell TEK:
+        .spartCell= stat_tek
+    a(href='../') Home
