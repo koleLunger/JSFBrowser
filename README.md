@@ -4,6 +4,7 @@ Uses the "JSFDB API" to search and view players and fighters in the JSFighter On
 
 JSFBrowser is written in [Nodejs](https://nodejs.org/en/), using [Express.js](https://expressjs.com/) and [PUG templating engine](https://pugjs.org/api/getting-started.html).
 
+
 Can currently:
 
 - List all players
