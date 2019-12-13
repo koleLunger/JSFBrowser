@@ -97,10 +97,10 @@ app.get('/add/', function(req, res, err) {
 });
 
 app.post('/add/', function(req, res, err) {
-    request.post("http://jsfdb.supermechacow.com/api/v0/fighter/", {
+    request.post("http://jsfdb.supermechacow.com/api/v0/fighter/add/", {
         form: {
             fightername: req.body.fightername,
-            fighterID: req.body.fighterID
+            player_name: req.body.player_name
         }
     }, function(request_err, request_res, request_body) {
         if (request_res.statusCode == 201) {
