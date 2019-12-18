@@ -23,3 +23,13 @@ body{
   text-align: center;
   margin: 2px;
 }
+body {
+  background-color: #ff0000
+
+}
+title {
+  color: #ff0000
+}
+form{
+  color: #1100fa
+}
