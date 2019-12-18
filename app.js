@@ -15,21 +15,32 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(express.static("public"));
 
-const serverAdress = '208.67.143.65';
+const serverAdress = '192.168.56.1';
 app.listen(3000, function() {
     console.log('Listening on port ' + 3000 + '.');
 });
 
 app.get('/', function(req, res, err) {
+
+  /* GET github stuff */
+  let options = {
+    url: 'https://api.github.com/repos/koleLunger/JSFBrowser',
+    headers: {
+      'User-Agent': 'request'
+    }
+  };
+  request(options, function(request_err, request_res, request_body) {
+    let gitHubJSON = JSON.parse(request_body)
+  });
+
+  /* GET fighter stuff */
   request('http://'+ serverAdress +'/api/v0/fighter/list/', function(request_err, request_res, request_body) {
       if (request_err || request_res.statusCode != 200) {
           res.send("Oops! There was a problem with the request module: <br>" + request_err);
       } else if (request_body == "undefined") {
           res.send("Oops! Server had no fighters!");
       } else {
-          res.status(200).render('index', {
-              list: JSON.parse(request_body)
-          });
+          res.status(200).render('index', {list: JSON.parse(request_body), gitURL: gitHubJSON});
       }
   })
 });
