@@ -1,17 +1,16 @@
 html
   head
-    title JS Fighter
+    title Fighter Stats
     link(rel='stylesheet', href='/stylesheets/layout.css')
   body
-    form(action="/search/", method="post" id="Header")
-      | JSF Browser
-    a(href='/list/players/') 
-    .spartBox
-        each fighter in list
-            .spartRow
-                .spartCell
-                    a(href='../../fighter/' + fighter.fighter_UID)= fighter.fighter_name
-    a(href='/list/fighters/') View More Fighters
+    form(action="/search/", method="post")
+      | Fighter Search:
+      input(type="text", name="search")
+      br
+      input(type="submit", value="Search")
+    a(href='/list/players/') List All Players
+    br
+    a(href='/list/fighters/') List All Fighters
     br
     a(href='/add') New Fighter
     br
